@@ -91,7 +91,7 @@ football-transfer-value/
 │   └── transfer_value_prediction.ipynb
 │
 ├── model/
-│   └── transfer_model.pkl
+│   └── all_model.pkl
 │
 ├── requirements.txt
 └── README.md
