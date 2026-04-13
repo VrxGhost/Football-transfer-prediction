@@ -64,9 +64,10 @@ Dataset size: ~450,000 valuation records, ~31,000 unique players
 | Linear Regression | + Position + Foot | 0.07 |
 | Linear Regression | + Contract Years | 0.18 |
 | Linear Regression | + Performance Stats | 0.25 |
-| **Random Forest** | **All Features** | **0.60** |
+| Random Forest | All Features | 0.58 |
+| **XGBoost** | **All Features** | **0.64** |
 
-> Random Forest significantly outperformed Linear Regression by capturing non-linear relationships — e.g. young players with high goals-per-match have exponentially higher values.
+> XGboost significantly outperformed Random Forest by capturing non-linear relationships — e.g. young players with high goals-per-match have exponentially higher values.
 
 ---
 
