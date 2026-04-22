@@ -9,6 +9,26 @@ A machine learning project that predicts football player transfer market values 
 Football clubs spend billions on player transfers every year. Accurately estimating a player's market value helps clubs make smarter decisions. This project builds a regression model that predicts a player's transfer value (in €) based on their performance stats, demographics, and contract situation.
 
 ---
+## 📌 About the Project
+ 
+Football transfers are one of the most financially significant events in professional sports. This project uses machine learning to analyze player attributes — such as age, market value, performance stats, and contract details — to predict the likelihood of a player being transferred.
+ 
+The model is trained and evaluated on a Kaggle dataset and follows a complete ML pipeline: data cleaning → feature engineering → model training → evaluation.
+ 
+🔗 **Kaggle Notebook:** [Football Transfer Prediction by duttaarya](https://www.kaggle.com/code/duttaarya/football-transfer-prediction)
+ 
+---
+ 
+## 🧠 How It Works
+ 
+The model pipeline includes:
+ 
+- **Data Preprocessing** – handling missing values, encoding categorical features, scaling
+- **Exploratory Data Analysis (EDA)** – understanding patterns in player stats and transfer history
+- **Feature Engineering** – selecting the most relevant features influencing transfer decisions
+- **Model Training** – training classification models (e.g., Random Forest, Logistic Regression, etc.)
+- **Evaluation** – measuring accuracy, precision, recall, and F1-score
+---
 
 ## 📊 Dataset
 
