@@ -119,6 +119,20 @@ football-transfer-value/
 ```
 
 ---
+## 🚀 Future Plans (Roadmap)
+ 
+This project is actively being developed. Here's what's coming next:
+ 
+- [ ] **Add notebook & scripts to repo** – migrate the Kaggle notebook code into this repository
+- [ ] **Update model based on latest Kaggle notebook** – sync improvements made in [`duttaarya/football-transfer-prediction`](https://www.kaggle.com/code/duttaarya/football-transfer-prediction)
+- [ ] **Build a full-fledged web application** – create a user-friendly frontend where users can input player stats and get transfer predictions instantly
+- [ ] **Deploy to a free hosting server** – host the web app on a free platform such as:
+  - [Render](https://render.com)
+  - [Railway](https://railway.app)
+  - [Hugging Face Spaces](https://huggingface.co/spaces)
+- [ ] **REST API** – expose the model as an API endpoint so it can be integrated into other tools
+- [ ] **Model improvements** – experiment with more advanced models (XGBoost, Neural Networks) and hyperparameter tuning
+---
 
 ## ▶️ How to Run
 
@@ -141,17 +155,16 @@ jupyter notebook notebooks/transfer_value_prediction.ipynb
 
 ---
 
-## 📦 Requirements
-
-```
-pandas
-numpy
-scikit-learn
-matplotlib
-seaborn
-joblib
-```
-
+## 🛠️ Tech Stack
+ 
+| Layer | Tools |
+|---|---|
+| Language | Python |
+| ML Libraries | scikit-learn, pandas, numpy |
+| Visualization | matplotlib, seaborn |
+| Notebook | Kaggle / Jupyter |
+| Deployment (planned) | Flask / Streamlit + Render/Railway |
+ 
 ---
 
 ---
