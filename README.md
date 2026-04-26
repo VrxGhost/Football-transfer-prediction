@@ -123,8 +123,6 @@ football-transfer-value/
  
 This project is actively being developed. Here's what's coming next:
  
-- [ ] **Add notebook & scripts to repo** – migrate the Kaggle notebook code into this repository
-- [ ] **Update model based on latest Kaggle notebook** – sync improvements made in [`duttaarya/football-transfer-prediction`](https://www.kaggle.com/code/duttaarya/football-transfer-prediction)
 - [ ] **Build a full-fledged web application** – create a user-friendly frontend where users can input player stats and get transfer predictions instantly
 - [ ] **Deploy to a free hosting server** – host the web app on a free platform such as:
   - [Render](https://render.com)
