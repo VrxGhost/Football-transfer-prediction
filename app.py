@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 #its for the main title or the 1st heading of the website
-st.title("_Football Prediction :green[system]_ 🔮⚽", text_alignment = "center")
+st.title("_Football Prediction :green[system]_ 🔮⚽")
 
 #loading the model
 
