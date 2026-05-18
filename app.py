@@ -142,7 +142,7 @@ def make_feature_bar(age, height, contract_years, goals_pm, assists_pm, matches)
     labels = ["Age", "Height", "Contract\nyears left",
               "Goals/match", "Assists/match", "Matches\nplayed"]
     raw    = [age, height, contract_years, goals_pm, assists_pm, matches]
-    maxes  = [40,  210,    10,             1.2,       0.8,        600]
+    maxes  = [40,  210,    10,           1.2,       0.8,        600]
     pcts   = [min(v / m, 1.0) * 100 for v, m in zip(raw, maxes)]
  
     fig = go.Figure(go.Bar(
@@ -169,15 +169,15 @@ def make_feature_bar(age, height, contract_years, goals_pm, assists_pm, matches)
 col_left, col_right = st.columns([1.1, 1], gap="large")
  
 with col_left:
-    age = st.slider("age_sl", 15, 40, 24, label_visibility="collapsed")
-    height = st.slider("height_sl", 155, 205, 181, label_visibility="collapsed")
-    contract_years = st.slider("contract_sl", 0.0, 8.0, 2.0, step=0.5, label_visibility="collapsed")
-    position = st.selectbox("pos_sel", ["Attacker", "Midfielder", "Defender", "Goalkeeper"], label_visibility="collapsed")
-    foot = st.selectbox("foot_sel", ["Right", "Left", "Both"], label_visibility="collapsed")
+    age = st.slider("Age", 15, 40, 24, label_visibility="visible")
+    height = st.slider("Height", 155, 205, 170, label_visibility="visible")
+    contract_years = st.slider("Contract_left(in year)", 0.0, 8.0, 2.0, step=0.5, label_visibility="visible")
+    position = st.selectbox("position", ["Attacker", "Midfielder", "Defender", "Goalkeeper"], label_visibility="visible")
+    foot = st.selectbox("foot_selection", ["Right", "Left", "Both"], label_visibility="visible")
 with col_right:
-    goals_pm = st.slider("goals_sl", 0.0, 1.2, 0.25, step=0.01, label_visibility="collapsed")
-    assists_pm = st.slider("assists_sl", 0.0, 0.8, 0.12, step=0.01, label_visibility="collapsed")
-    matches = st.slider("matches_sl", 0, 600, 120, step=5, label_visibility="collapsed")
+    goals_pm = st.slider("goals_per_match", 0.0, 1.2, 0.25, step=0.01, label_visibility="visible")
+    assists_pm = st.slider("assists_per_match", 0.0, 0.8, 0.12, step=0.01, label_visibility="visible")
+    matches = st.slider("matches_played", 0, 600, 120, step=5, label_visibility="visible")
     predict_btn = st.button("PREDICT VALUE", use_container_width=True)
 
 if predict_btn or True:   # show live preview always
@@ -199,11 +199,17 @@ if predict_btn or True:   # show live preview always
         with res_col:
             st.markdown('<p class="section-label">Estimated market value</p>', unsafe_allow_html=True)
 with res_col:
-            st.markdown("### Estimated Market Value")
-            st.markdown(f"# {fmt_eur(predicted)}")
-            st.markdown(f"Range: {fmt_eur(low)} — {fmt_eur(high)}")
-            tier, tier_color, tier_bg = tier_label(predicted)
-            st.markdown(f"**{tier}**")
+    st.markdown("### Estimated Market Value")
+    st.markdown(f"# {fmt_eur(predicted)}")
+    st.markdown(f"Range: {fmt_eur(low)} — {fmt_eur(high)}")
+    tier, tier_color, tier_bg = tier_label(predicted)
+    st.markdown(
+        f'<span style="background:{tier_bg}; color:{tier_color}; '
+        f'padding:4px 16px; border-radius:20px; font-weight:600;">'
+        f'{tier}</span>',
+        unsafe_allow_html=True
+    )
+    
 
 with chart_col:
             st.plotly_chart(make_gauge(predicted, low, high), use_container_width=True)
