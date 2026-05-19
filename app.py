@@ -1,9 +1,9 @@
 import streamlit as st  
-import pickle
 import numpy as np
 import pandas as pd
 import os
 import plotly.graph_objects as go 
+import xgboost as xgb
 
 #its for to page configuration like page icon and page title layout etc
 st.set_page_config(
@@ -20,15 +20,12 @@ st.title("_Football Prediction :green[system]_ 🔮⚽")
 
 @st.cache_resource
 def load_model():
-    model_path = "model.pkl"
+    model_path = "model.json"
     if not os.path.exists(model_path):
         return None, "model missing"
-    with open(model_path, "rb") as f:
-        obj = pickle.load(f)
-
-    if isinstance(obj, dict):
-        return obj.get("xgboost", list(obj.values())[0]), "ok"
-    return obj,"ok"
+    model = xgb.Booster()
+    model.load_model(model_path)
+    return model, "ok"
 
 model, model_status = load_model()
 
@@ -76,7 +73,7 @@ def build_input(age,height,contract_years,goals_pm,assists_pm,matches,position,f
     foot_map = {
         "Right": None,
         "Left": "foot_left",
-        "Both": "foot_both",
+        "Both": None,
     }
     if foot_map.get(foot):
         row[foot_map[foot]] = 1.0
@@ -97,7 +94,7 @@ def tier_label(val_eur):
 def fmt_eur(val):
     if val >= 1_000_000:
         return f"€ {val/1_000_000:.1f}M"
-    return f"€{val/1_000_000:.0f}K"
+    return f"€{val/1_000:.0f}K"
 
 def make_gauge(predicted, low, high):
     max_val = 120_000_000
@@ -180,7 +177,7 @@ with col_right:
     matches = st.slider("matches_played", 0, 600, 120, step=5, label_visibility="visible")
     predict_btn = st.button("PREDICT VALUE", use_container_width=True)
 
-if predict_btn or True:   # show live preview always
+if predict_btn:   # show live preview always
     X_input = build_input(
         age, height, contract_years,
         goals_pm, assists_pm, matches,
@@ -188,29 +185,29 @@ if predict_btn or True:   # show live preview always
     )
  
     if model is not None:
-        raw_pred   = float(model.predict(X_input)[0])
-        predicted  = max(raw_pred, 0)
+        dmatrix = xgb.DMatrix(X_input)
+        raw_pred  = float(model.predict(dmatrix)[0])
+        predicted = max(raw_pred, 0)
         low        = predicted * 0.78
         high       = predicted * 1.22
         tier, tier_color, tier_bg = tier_label(predicted)
  
-        res_col, chart_col = st.columns([1, 1.2], gap="large")
+    res_col, chart_col = st.columns([1, 1.2], gap="large")
  
-        with res_col:
-            st.markdown('<p class="section-label">Estimated market value</p>', unsafe_allow_html=True)
-with res_col:
-    st.markdown("### Estimated Market Value")
-    st.markdown(f"# {fmt_eur(predicted)}")
-    st.markdown(f"Range: {fmt_eur(low)} — {fmt_eur(high)}")
-    tier, tier_color, tier_bg = tier_label(predicted)
-    st.markdown(
-        f'<span style="background:{tier_bg}; color:{tier_color}; '
-        f'padding:4px 16px; border-radius:20px; font-weight:600;">'
-        f'{tier}</span>',
-        unsafe_allow_html=True
-    )
+    with res_col:
+        st.markdown('<p class="section-label">Estimated market value</p>', unsafe_allow_html=True)
+    with res_col:
+        st.markdown("### Estimated Market Value")
+        st.markdown(f"# {fmt_eur(predicted)}")
+        st.markdown(f"Range: {fmt_eur(low)} — {fmt_eur(high)}")
+        tier, tier_color, tier_bg = tier_label(predicted)
+        st.markdown(
+            f'<span style="background:{tier_bg}; color:{tier_color}; '
+            f'padding:4px 16px; border-radius:20px; font-weight:600;">'
+            f'{tier}</span>',
+            unsafe_allow_html=True
+        )
     
-
-with chart_col:
+    with chart_col:
             st.plotly_chart(make_gauge(predicted, low, high), use_container_width=True)
             st.plotly_chart(make_feature_bar(age, height, contract_years, goals_pm, assists_pm, matches), use_container_width=True)
