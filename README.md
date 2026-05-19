@@ -1,3 +1,13 @@
+---
+title: Football Transfer Predictor
+emoji: ⚽
+colorFrom: green
+colorTo: blue
+sdk: streamlit
+sdk_version: "1.45.0"
+app_file: app.py
+pinned: false
+---
 # ⚽ Football Transfer Value Prediction
 
 A machine learning project that predicts football player transfer market values using real Transfermarkt data — deployed as a live web application.
