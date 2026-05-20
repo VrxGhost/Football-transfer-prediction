@@ -72,8 +72,8 @@ Dataset size: ~450,000 valuation records across ~31,000 unique players
 | Linear Regression | + Position + Foot | 0.07 |
 | Linear Regression | + Contract Years | 0.18 |
 | Linear Regression | + Performance Stats | 0.25 |
-| Random Forest | All Features | 0.58 |
-| **XGBoost** | **All Features** | **0.64** |
+| Random Forest | All Features | 0.56 |
+| **XGBoost** | **All Features** | **0.62** |
 
 XGBoost was selected as the final model. It captures non-linear relationships — for example, young players with high goals-per-match have disproportionately higher market values, which linear models cannot express.
 
