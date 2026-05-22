@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 #its for the main title or the 1st heading of the website
-st.title("_Football Prediction :green[system]_ 🔮⚽")
+st.title("_Football Prediction :green[System]_ 🔮⚽")
 
 #loading the model
 
