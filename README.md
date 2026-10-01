@@ -111,9 +111,6 @@ CI/CD              → GitHub Actions auto-deploys on push to main
 
 ![Activity Diagram](docs/diagrams/3-activity-diagram.svg)
 
-**Sequence diagram:** the calls between the browser, `app.py`, the XGBoost model and Plotly for one prediction.
-
-![Sequence Diagram](docs/diagrams/4-sequence-diagram.svg)
 
 Streamlit reruns `app.py` top to bottom on every widget change. The model is loaded with `@st.cache_resource`, so it is read from disk only once.
 
