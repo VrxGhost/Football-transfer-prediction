@@ -32,6 +32,14 @@ Adjust player attributes using the sliders and see the predicted market value up
 
 ---
 
+## 🏛️ System Architecture
+
+![System Architecture](docs/diagrams/1-system-architecture.svg)
+
+The model is trained in a Kaggle notebook and saved as `model.json`. Every push to `main` triggers GitHub Actions, which syncs the repo to Hugging Face Spaces. HF builds the Docker image and runs the Streamlit app on port 8501.
+
+---
+
 ## 📊 Dataset
 
 **Source:** [Football Data from Transfermarkt](https://www.kaggle.com/datasets/davidcariboo/player-scores) via Kaggle
@@ -80,6 +88,8 @@ XGBoost was selected as the final model. It captures non-linear relationships �
 
 ## 🏗️ ML Pipeline
 
+![ML Training Pipeline](docs/diagrams/2-ml-pipeline.svg)
+
 ```
 Data Loading       → players.csv + player_valuations.csv + appearances.csv
 Data Merging       → joined on player_id
@@ -92,6 +102,20 @@ Serialization      → xgb.save_model("model.json") — native XGBoost format
 Deployment         → Streamlit app → Docker → HuggingFace Spaces
 CI/CD              → GitHub Actions auto-deploys on push to main
 ```
+
+---
+
+## ⚙️ How the App Works
+
+**Activity diagram:** what happens from opening the app to seeing a prediction.
+
+![Activity Diagram](docs/diagrams/3-activity-diagram.svg)
+
+**Sequence diagram:** the calls between the browser, `app.py`, the XGBoost model and Plotly for one prediction.
+
+![Sequence Diagram](docs/diagrams/4-sequence-diagram.svg)
+
+Streamlit reruns `app.py` top to bottom on every widget change. The model is loaded with `@st.cache_resource`, so it is read from disk only once.
 
 ---
 
@@ -116,6 +140,9 @@ Football-transfer-prediction/
 ├── model.json                          # Trained XGBoost model (native format)
 ├── football-transfer-prediction.ipynb  # Full training notebook
 ├── requirements.txt                    # Python dependencies
+├── Dockerfile                          # Container build for HuggingFace Spaces
+├── docs/
+│   └── diagrams/                       # Architecture, pipeline, activity & sequence diagrams (.svg)
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml                  # CI/CD — auto-deploys to HuggingFace on push
