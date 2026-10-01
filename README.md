@@ -111,7 +111,6 @@ CI/CD              → GitHub Actions auto-deploys on push to main
 
 ![Activity Diagram](docs/diagrams/3-activity-diagram.svg)
 
-
 Streamlit reruns `app.py` top to bottom on every widget change. The model is loaded with `@st.cache_resource`, so it is read from disk only once.
 
 ---
@@ -139,7 +138,10 @@ Football-transfer-prediction/
 ├── requirements.txt                    # Python dependencies
 ├── Dockerfile                          # Container build for HuggingFace Spaces
 ├── docs/
-│   └── diagrams/                       # Architecture, pipeline, activity & sequence diagrams (.svg)
+│   └── diagrams/
+│       ├── 1-system-architecture.svg   # Training → GitHub → CI/CD → HF Spaces
+│       ├── 2-ml-pipeline.svg           # Data loading → features → model comparison
+│       └── 3-activity-diagram.svg      # App flow from inputs to prediction
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml                  # CI/CD — auto-deploys to HuggingFace on push
