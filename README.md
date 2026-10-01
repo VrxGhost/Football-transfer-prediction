@@ -3,9 +3,8 @@ title: Football Transfer Predictor
 emoji: ⚽
 colorFrom: green
 colorTo: blue
-sdk: streamlit
-sdk_version: "1.45.0"
-app_file: app.py
+sdk: docker
+app_port: 8501
 pinned: false
 ---
 # ⚽ Football Transfer Value Prediction
