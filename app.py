@@ -71,7 +71,7 @@ def build_input(age,height,contract_years,goals_pm,assists_pm,matches,position,f
         row[pos_map[position]] = 1.0
 
     foot_map = {
-        "Right": None,
+        "Right": "foot_right",
         "Left": "foot_left",
         "Both": None,
     }
