@@ -7,14 +7,12 @@ sdk: docker
 app_port: 8501
 pinned: false
 ---
+
 # ⚽ Football Transfer Value Prediction
 
 A machine learning project that predicts football player transfer market values using real Transfermarkt data — deployed as a live web application.
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-HuggingFace_Spaces-orange)](https://huggingface.co/spaces/VrxGhost/football-transfer-predictor)
-[![Python](https://img.shields.io/badge/Python-3.10-blue)](https://python.org)
-[![XGBoost](https://img.shields.io/badge/Model-XGBoost-green)](https://xgboost.readthedocs.io)
-[![Streamlit](https://img.shields.io/badge/App-Streamlit-red)](https://streamlit.io)
+[![Live Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-orange)](https://huggingface.co/spaces/VrxGhost/football-transfer-predictor) [![Python](https://img.shields.io/badge/Python-3.10-blue)](https://python.org) [![XGBoost](https://img.shields.io/badge/Model-XGBoost-green)](https://xgboost.readthedocs.io) [![Streamlit](https://img.shields.io/badge/App-Streamlit-red)](https://streamlit.io)
 
 ---
 
@@ -45,7 +43,7 @@ The model is trained in a Kaggle notebook and saved as `model.json`. Every push 
 **Source:** [Football Data from Transfermarkt](https://www.kaggle.com/datasets/davidcariboo/player-scores) via Kaggle
 
 | File | Contents |
-|---|---|
+| --- | --- |
 | `players.csv` | Demographics — age, position, height, nationality |
 | `player_valuations.csv` | Historical market values per player |
 | `appearances.csv` | Match-level stats — goals, assists, minutes |
@@ -57,7 +55,7 @@ Dataset size: ~450,000 valuation records across ~31,000 unique players
 ## 🔧 Features Used
 
 | Feature | Description |
-|---|---|
+| --- | --- |
 | `age` | Player age derived from date of birth |
 | `height_in_cm` | Player height |
 | `position` | Playing position — one-hot encoded (Attacker / Midfielder / Defender / Goalkeeper) |
@@ -74,7 +72,7 @@ Dataset size: ~450,000 valuation records across ~31,000 unique players
 ## 📈 Model Results
 
 | Model | Features | Test R² |
-|---|---|---|
+| --- | --- | --- |
 | Linear Regression | Age + Height | 0.07 |
 | Linear Regression | + Position + Foot | 0.07 |
 | Linear Regression | + Contract Years | 0.18 |
@@ -164,7 +162,7 @@ streamlit run app.py
 ## 🛠️ Tech Stack
 
 | Layer | Tools |
-|---|---|
+| --- | --- |
 | Language | Python 3.10 |
 | ML | XGBoost, scikit-learn, pandas, numpy |
 | App | Streamlit, Plotly |
@@ -188,5 +186,4 @@ streamlit run app.py
 
 **Arya Dutta** — B.Tech Student | Aspiring MLOps Engineer
 
-[![Kaggle](https://img.shields.io/badge/Kaggle-duttaarya-blue)](https://www.kaggle.com/code/duttaarya/football-transfer-prediction)
-[![HuggingFace](https://img.shields.io/badge/HuggingFace-VrxGhost-yellow)](https://huggingface.co/VrxGhost)
+[![Kaggle](https://img.shields.io/badge/Kaggle-duttaarya-blue)](https://www.kaggle.com/code/duttaarya/football-transfer-prediction) [![HuggingFace](https://img.shields.io/badge/HuggingFace-VrxGhost-yellow)](https://huggingface.co/VrxGhost)
