@@ -28,6 +28,9 @@ def load_model():
     return model, "ok"
 
 model, model_status = load_model()
+if model is None:
+    st.error("model.json is missing. Put it next to app.py and restart the app.")
+    st.stop()
 
 #Exacting encoded columns 
 
