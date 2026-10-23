@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 #its for the main title or the 1st heading of the website
-st.title("_Football Prediction :green[System]_ 🔮⚽")
+st.title("_Football Prediction :green[System]_ ⚽")
 
 #loading the model
 
@@ -137,34 +137,6 @@ def make_gauge(predicted, low, high):
     )
     return fig
  
- 
-def make_feature_bar(age, height, contract_years, goals_pm, assists_pm, matches):
-    labels = ["Age", "Height", "Contract\nyears left",
-              "Goals/match", "Assists/match", "Matches\nplayed"]
-    raw    = [age, height, contract_years, goals_pm, assists_pm, matches]
-    maxes  = [40,  210,    10,           1.2,       0.8,        600]
-    pcts   = [min(v / m, 1.0) * 100 for v, m in zip(raw, maxes)]
- 
-    fig = go.Figure(go.Bar(
-        x=labels, y=pcts,
-        marker_color=["#00e676" if p >= 60 else "#1c2133" if p <= 20 else "#1a3a28"
-                      for p in pcts],
-        marker_line_width=0,
-        text=[f"{v:.2f}" if isinstance(v, float) else str(v) for v in raw],
-        textposition="outside",
-        textfont={"color": "#7c8296", "size": 11},
-    ))
-    fig.update_layout(
-        paper_bgcolor="#0a0e1a",
-        plot_bgcolor="#111827",
-        margin=dict(l=10, r=10, t=10, b=10),
-        height=220,
-        xaxis=dict(showgrid=False, tickfont=dict(color="#7c8296", size=10)),
-        yaxis=dict(showgrid=False, visible=False, range=[0, 130]),
-        bargap=0.35,
-        showlegend=False,
-    )
-    return fig
 
 col_left, col_right = st.columns([1.1, 1], gap="large")
  
@@ -213,4 +185,3 @@ if predict_btn:   # show live preview always
     
     with chart_col:
             st.plotly_chart(make_gauge(predicted, low, high), use_container_width=True)
-            st.plotly_chart(make_feature_bar(age, height, contract_years, goals_pm, assists_pm, matches), use_container_width=True)
