@@ -1,5 +1,4 @@
 import streamlit as st  
-import numpy as np
 import pandas as pd
 import os
 import plotly.graph_objects as go 
@@ -99,12 +98,12 @@ def fmt_eur(val):
         return f"€ {val/1_000_000:.1f}M"
     return f"€{val/1_000:.0f}K"
 
-def make_gauge(predicted, low, high):
+def make_gauge(predicted):
     max_val = 120_000_000
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
         value = predicted,
-        number = {"prefix": "€", "suffix": "", "valueformat":",0f", "font":{"size":20,"color":"#e8eaf0","family": "DM Sans"}},
+        number = {"prefix": "€", "suffix": "", "valueformat":",.0f", "font":{"size":20,"color":"#e8eaf0","family": "DM Sans"}},
         gauge={
             "axis": {"range": [0, max_val], "tickwidth": 0,
                      "tickcolor": "#1c2133",
@@ -142,40 +141,33 @@ col_left, col_right = st.columns([1.1, 1], gap="large")
  
 with col_left:
     age = st.slider("Age", 15, 40, 24, label_visibility="visible")
-    height = st.slider("Height", 155, 205, 170, label_visibility="visible")
-    contract_years = st.slider("Contract_left(in year)", 0.0, 8.0, 2.0, step=0.5, label_visibility="visible")
-    position = st.selectbox("position", ["Attacker", "Midfielder", "Defender", "Goalkeeper"], label_visibility="visible")
-    foot = st.selectbox("foot_selection", ["Right", "Left", "Both"], label_visibility="visible")
+    height = st.slider("Height (cm)", 155, 205, 170, label_visibility="visible")
+    contract_years = st.slider("Contract years left", 0.0, 5.0, 2.0, step=0.5, label_visibility="visible")
+    position = st.selectbox("Position", ["Attacker", "Midfielder", "Defender", "Goalkeeper"], label_visibility="visible")
+    foot = st.selectbox("Preferred foot", ["Right", "Left", "Both"], label_visibility="visible")
 with col_right:
-    goals_pm = st.slider("goals_per_match", 0.0, 1.2, 0.25, step=0.01, label_visibility="visible")
-    assists_pm = st.slider("assists_per_match", 0.0, 0.8, 0.12, step=0.01, label_visibility="visible")
-    matches = st.slider("matches_played", 0, 600, 120, step=5, label_visibility="visible")
+    goals_pm = st.slider("Goals per match", 0.0, 1.2, 0.25, step=0.01, label_visibility="visible")
+    assists_pm = st.slider("Assists per match", 0.0, 0.8, 0.12, step=0.01, label_visibility="visible")
+    matches = st.slider("Matches played", 0, 600, 120, step=5, label_visibility="visible")
     predict_btn = st.button("PREDICT VALUE", use_container_width=True)
 
-if predict_btn:   # show live preview always
+if predict_btn:   
     X_input = build_input(
         age, height, contract_years,
         goals_pm, assists_pm, matches,
         position, foot
     )
  
-    if model is not None:
-        dmatrix = xgb.DMatrix(X_input)
-        raw_pred  = float(model.predict(dmatrix)[0])
-        predicted = max(raw_pred, 0)
-        low        = predicted * 0.78
-        high       = predicted * 1.22
-        tier, tier_color, tier_bg = tier_label(predicted)
+    dmatrix = xgb.DMatrix(X_input)
+    raw_pred  = float(model.predict(dmatrix)[0])
+    predicted = max(raw_pred, 0)
+    tier, tier_color, tier_bg = tier_label(predicted)
  
     res_col, chart_col = st.columns([1, 1.2], gap="large")
  
     with res_col:
-        st.markdown('<p class="section-label">Estimated market value</p>', unsafe_allow_html=True)
-    with res_col:
         st.markdown("### Estimated Market Value")
         st.markdown(f"# {fmt_eur(predicted)}")
-        st.markdown(f"Range: {fmt_eur(low)} — {fmt_eur(high)}")
-        tier, tier_color, tier_bg = tier_label(predicted)
         st.markdown(
             f'<span style="background:{tier_bg}; color:{tier_color}; '
             f'padding:4px 16px; border-radius:20px; font-weight:600;">'
@@ -184,4 +176,4 @@ if predict_btn:   # show live preview always
         )
     
     with chart_col:
-            st.plotly_chart(make_gauge(predicted, low, high), use_container_width=True)
+        st.plotly_chart(make_gauge(predicted), use_container_width=True)
