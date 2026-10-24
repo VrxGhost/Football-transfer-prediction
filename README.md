@@ -8,6 +8,9 @@ app_port: 8501
 pinned: false
 ---
 
+
+<img width="2803" height="1347" alt="App: default inputs predict €7.5M" src="https://github.com/user-attachments/assets/75aa01fa-da9d-43a3-9bd9-b5d90e93c5ad" />
+
 # ⚽ Football Transfer Value Prediction
 
 An XGBoost model that estimates a football player's market value (in €) from age, height, position, preferred foot, contract length and scoring record, trained on Transfermarkt data and served as a Streamlit app on Hugging Face Spaces.
