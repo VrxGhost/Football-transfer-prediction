@@ -9,13 +9,14 @@ pinned: false
 ---
 
 
-<img width="2803" height="1347" alt="App: default inputs predict €7.5M" src="https://github.com/user-attachments/assets/75aa01fa-da9d-43a3-9bd9-b5d90e93c5ad" />
-
 # ⚽ Football Transfer Value Prediction
 
 An XGBoost model that estimates a football player's market value (in €) from age, height, position, preferred foot, contract length and scoring record, trained on Transfermarkt data and served as a Streamlit app on Hugging Face Spaces.
 
 [![Live Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-orange)](https://huggingface.co/spaces/VrxGhost/football-transfer-predictor) [![Python](https://img.shields.io/badge/Python-3.12-blue)](https://python.org) [![XGBoost](https://img.shields.io/badge/Model-XGBoost-green)](https://xgboost.readthedocs.io) [![Streamlit](https://img.shields.io/badge/App-Streamlit-red)](https://streamlit.io) [![Kaggle](https://img.shields.io/badge/Notebook-Kaggle-20BEFF)](https://www.kaggle.com/code/duttaarya/football-transfer-prediction)
+
+<img width="2803" height="1347" alt="App: default inputs predict €7.5M" src="https://github.com/user-attachments/assets/75aa01fa-da9d-43a3-9bd9-b5d90e93c5ad" />
+
 
 ---
 
